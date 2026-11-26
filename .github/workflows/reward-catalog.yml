@@ -1,0 +1,40 @@
+name: Reward catalog verification
+
+on:
+  push:
+    paths:
+      - 'examples/reward-catalog/**'
+      - 'docs/samples.md'
+      - '.github/workflows/reward-catalog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: examples/reward-catalog
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: examples/reward-catalog/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run test:proof
+      - uses: actions/upload-artifact@v5
+        if: ${{ !cancelled() }}
+        with:
+          name: reward-catalog-evidence
+          path: examples/reward-catalog/test-results/
+          if-no-files-found: warn
+          retention-days: 14

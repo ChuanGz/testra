@@ -1,0 +1,13 @@
+:root {
+  color-scheme: light;
+  background: #f4f6fa;
+}
+
+main {
+  width: min(100% - 2rem, 56rem);
+  margin: 2rem auto;
+}
+
+main > section + section {
+  margin-top: 1rem;
+}

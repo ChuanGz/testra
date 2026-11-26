@@ -10,7 +10,7 @@ Use your own agent as the **Verifier**. It can plan tests, write specs, and inve
 
 1. Pick one important flow or a specific change. Write down the expected behavior and find any test that already covers it.
 2. Use the [Playwright setup guide](docs/playwright-setup.md) from the application repository. Reuse its test runner, fixtures, and sign-in setup.
-3. Try the [sample scenarios](docs/samples.md). The search example has a runnable Playwright spec that uses its own page and responses.
+3. Try the [reward catalog reference](examples/reward-catalog/README.md) for two browser flows and a regression proof. The [sample scenarios](docs/samples.md) include the standalone Goblin search spec.
 4. Use the [skill catalog](docs/regression-skills.md) to plan regression checks, or [frontend diagnostics](docs/frontend-diagnostics.md) to investigate a failure.
 
 ## How Testra is designed
